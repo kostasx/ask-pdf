@@ -1,0 +1,5 @@
+.env
+.cache
+build/
+tmp/*.pdf
+demo/
