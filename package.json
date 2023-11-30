@@ -10,7 +10,9 @@
     "start": "node --enable-source-maps ./server.js",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "prepare": "husky install",
+    "precommit": "lint-staged"
   },
   "keywords": [
     "heroku",
@@ -30,6 +32,8 @@
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.1.0",
     "postcss": "^8.4.31",
     "postcss-preset-mantine": "^1.9.1",
     "postcss-simple-vars": "^7.0.1",
@@ -64,6 +68,15 @@
     "pgvector": "^0.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,md,json}": [
+      "prettier --write"
+    ]
   },
   "engines": {
     "node": ">=20.10.0",
