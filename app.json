@@ -1,7 +1,7 @@
 {
   "name": "Ask PDF",
   "description": "Ask question to a PDF file using AI and pgvector.",
-  "repository": "https://github.com/heroku-demos/ask-pdf",
+  "repository": "https://github.com/heroku-reference-apps/ask-pdf",
   "keywords": ["nodejs", "ai", "pgvector", "langchain", "remix"],
   "addons": ["heroku-postgresql:standard-0", "bucketeer:hobbyist"],
   "environments": {
