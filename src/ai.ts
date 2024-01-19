@@ -1,10 +1,9 @@
 import type { ChainValues } from 'langchain/schema';
 
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { ChatOpenAI } from 'langchain/chat_models/openai';
-import { PGVectorStore } from 'langchain/vectorstores/pgvector';
+import { OpenAIEmbeddings, ChatOpenAI } from '@langchain/openai';
+import { PGVectorStore } from '@langchain/community/vectorstores/pgvector';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
-import { PromptTemplate } from 'langchain/prompts';
+import { PromptTemplate } from '@langchain/core/prompts';
 import { RetrievalQAChain, loadQAStuffChain } from 'langchain/chains';
 import { PDFUtils } from '~/src/pdf';
 
