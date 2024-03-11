@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS pdf_documents (
+    id SERIAL PRIMARY KEY,
+    filename VARCHAR(255),
+    url VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
