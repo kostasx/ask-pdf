@@ -22,7 +22,7 @@ import {
   IconDatabaseSearch,
   IconBracketsContain,
 } from '@tabler/icons-react';
-import { Error } from '~/components/error';
+import { CustomError } from '~/components/error';
 import { getEmbeddings } from '~/server/ai.server';
 import { similaritySearch } from '~/server/db.server';
 
@@ -46,7 +46,7 @@ export async function action({ request }: ActionFunctionArgs) {
     };
     return response;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
+  } catch (err: unknown) {
     return {
       success: false,
       reason: `The application can't connect to the database. Please check database configuration`,
@@ -68,7 +68,7 @@ export default function PGVectorDemo() {
       data: 'An error ocurred',
       statusText: data.reason || 'An unknown error ocurred. Please try again.',
     };
-    return <Error error={error} />;
+    return <CustomError error={error} />;
   }
 
   return (

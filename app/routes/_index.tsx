@@ -9,7 +9,7 @@ import { Grid } from '@mantine/core';
 import { StateContextProvider } from '~/components/state';
 import { PDF } from '~/components/pdf';
 import { Chat } from '~/components/chat';
-import { Error } from '~/components/error';
+import { CustomError } from '~/components/error';
 
 import { listPDFs } from '~/server/db.server';
 
@@ -24,7 +24,7 @@ export async function loader() {
       documents,
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
+  } catch (err: unknown) {
     throw new Response('An error ocurred', {
       status: 500,
       statusText: `The application can't connect to the database. Please check database configuration`,
@@ -36,7 +36,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-    return <Error error={error} />;
+    return <CustomError error={error} />;
   }
 
   const errorResponse: ErrorResponse = {
@@ -45,7 +45,7 @@ export function ErrorBoundary() {
     data: 'An unknown error ocurred. Please try again.',
   };
 
-  return <Error error={errorResponse} />;
+  return <CustomError error={errorResponse} />;
 }
 
 export default function App() {
