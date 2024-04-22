@@ -101,7 +101,9 @@ export class DB {
    * @returns {Promise<{name: string, url: string}[]>} A promise that resolves to an array of objects, each containing the 'name' and 'url' of a PDF document.
    */
   async listPDFs() {
-    const { rows } = await this.query('SELECT * FROM pdf_documents');
+    const { rows } = await this.query(
+      'SELECT * FROM pdf_documents ORDER BY filename ASC'
+    );
     return rows.map((row) => ({
       name: row.filename,
       url: row.url,
