@@ -31,7 +31,7 @@ heroku create <app-name>
 Install the [Heroku PostgreSQL with pgvector addon](https://elements.heroku.com/addons/heroku-postgresql):
 
 ```sh
- heroku addons:create heroku-postgresql:standard-0
+ heroku addons:create heroku-postgresql:essential-0
 ```
 
 Install the [Bucketeer addon](https://elements.heroku.com/addons/bucketeer):
