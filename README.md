@@ -1,6 +1,6 @@
 # Ask PDF
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/heroku-reference-apps/ask-pdf)
 
 Ask questions to a PDF file using [Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401) with pgvector and Heroku Managed Inference and Agents.
 

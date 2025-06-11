@@ -6,7 +6,13 @@
   "addons": [
     "heroku-postgresql:essential-0",
     "bucketeer:hobbyist",
-    "heroku-inference:claude-4-sonnet",
-    "heroku-inference:cohere-embed-multilingual"
+    {
+      "plan": "heroku-inference:claude-4-sonnet",
+      "as": "INFERENCE"
+    },
+    {
+      "plan": "heroku-inference:cohere-embed-multilingual",
+      "as": "EMBEDDING"
+    }
   ]
 }
