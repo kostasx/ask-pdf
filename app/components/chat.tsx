@@ -1,7 +1,8 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import type { ChatData } from '~/types/chat';
-import { useState, useRef, useEffect, useContext } from 'react';
-import { useFetcher } from '@remix-run/react';
+import { useState, useRef, useEffect, useContext, useCallback } from 'react';
+import { useFetcher } from 'react-router';
+import ReactMarkdown from 'react-markdown';
 import {
   useMantineTheme,
   Box,
@@ -27,16 +28,14 @@ const ChatMessage = ({
   message,
 }: {
   icon?: JSX.Element;
-  message: string;
+  message: ReactNode;
 }) => {
   return (
     <Card withBorder shadow="md" radius="md" mt="sm">
       <Card.Section inheritPadding p="md">
         <Flex align="flex-start">
           <Box mr="sm">{icon}</Box>
-          <Box>
-            <Text>{message}</Text>
-          </Box>
+          <Box>{message}</Box>
         </Flex>
       </Card.Section>
     </Card>
@@ -50,7 +49,12 @@ const ChatResponse: FC<{ answer: string }> = ({
 }) => {
   const theme = useMantineTheme();
   const icon = <IconMessage2Check color={theme.colors.green[7]} />;
-  return <ChatMessage icon={icon} message={answer} />;
+  return (
+    <ChatMessage
+      icon={icon}
+      message={<ReactMarkdown>{answer}</ReactMarkdown>}
+    />
+  );
 };
 
 export const Chat = () => {
@@ -66,17 +70,19 @@ export const Chat = () => {
   const response = fetcher.data?.response;
   const errors = fetcher.data?.errors;
 
-  useEffect(() => {
-    if (response) {
-      setAnswer(response.text);
-    }
-
-    if (isSubmitting) {
+  const handleResponseChange = useCallback(() => {
+    if (response?.answer) {
+      setAnswer(response.answer);
+    } else if (isSubmitting) {
       setAnswer('');
     } else {
       formRef.current?.reset();
     }
   }, [response, isSubmitting]);
+
+  useEffect(() => {
+    handleResponseChange();
+  }, [handleResponseChange]);
 
   const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -138,9 +144,19 @@ export const Chat = () => {
           >
             Submit
           </Button>
-          {question && <ChatMessage icon={iconQuestion} message={question} />}
+          {question && (
+            <ChatMessage
+              icon={iconQuestion}
+              message={<Text>{question}</Text>}
+            />
+          )}
           {answer && <ChatResponse answer={answer} />}
-          {errors && <ChatMessage icon={iconError} message={errors.filename} />}
+          {errors && (
+            <ChatMessage
+              icon={iconError}
+              message={<Text>{errors.filename}</Text>}
+            />
+          )}
           <Space h="md" />
           <Button variant="filled" color="red" onClick={handleReset}>
             Restart
